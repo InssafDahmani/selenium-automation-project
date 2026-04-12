@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="US5 - Quantity Management Test Suite">
+    
+    <test name="US5 Quantity Tests">
+        <classes>
+            <class name="com.automation.tests.US5QuantityTests"/>
+        </classes>
+    </test>
+
+</suite>
