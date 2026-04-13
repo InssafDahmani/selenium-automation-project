@@ -1,24 +1,24 @@
-package com.automation.pages;
+package com.automation.pages.us05;
 
-import com.automation.base.BasePage;
+import com.automation.base.us05.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import java.time.Duration;
 import java.util.List;
 
 public class CartPage extends BasePage {
 
     private static final String CART_URL = "https://advantageonlineshopping.com/#/shoppingCart";
-    private static final By CART_TABLE     = By.cssSelector("#shoppingCart table.fixedTableEdgeCompatibility");
-    private static final By CART_ROWS      = By.cssSelector("#shoppingCart tr.ng-scope:not(.lastProduct)");
-    private static final By PRODUCT_NAME   = By.cssSelector("label.productName");
-    private static final By QTY_LABEL      = By.cssSelector("td.quantityMobile label.ng-binding");
-    private static final By PRICE_LABEL    = By.cssSelector("p.price.ng-binding");
-    private static final By EDIT_LINK      = By.cssSelector("a.edit");     // link, not button
-    private static final By REMOVE_LINK    = By.cssSelector("a.remove");
+
+    private static final By CART_ROWS = By.cssSelector("#shoppingCart tr.ng-scope:not(.lastProduct)");
+    private static final By PRODUCT_NAME = By.cssSelector("label.productName");
+    private static final By QTY_LABEL = By.cssSelector("td.quantityMobile label.ng-binding");
+    private static final By PRICE_LABEL = By.cssSelector("p.price.ng-binding");
+    private static final By EDIT_LINK = By.cssSelector("a.edit");
+    private static final By PLUS_BUTTON = By.cssSelector("div.plus");
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -32,10 +32,6 @@ public class CartPage extends BasePage {
 
     public boolean isCartNotEmpty() {
         return !driver.findElements(CART_ROWS).isEmpty();
-    }
-
-    public int getCartItemsCount() {
-        return driver.findElements(CART_ROWS).size();
     }
 
     private WebElement getRow(int index) {
@@ -58,19 +54,14 @@ public class CartPage extends BasePage {
 
     public double getProductPrice(int rowIndex) {
         String raw = getRow(rowIndex).findElement(PRICE_LABEL).getText().trim();
-        return parsePrice(raw);
+        String cleaned = raw.replaceAll("[^0-9.]", "");
+        return Double.parseDouble(cleaned);
     }
 
     public void clickEditLink(int rowIndex) {
         WebElement editLink = getRow(rowIndex).findElement(EDIT_LINK);
-        waitForClickable(EDIT_LINK);
         editLink.click();
-        
-        waitForClickable(By.cssSelector("div.plus"));
-    }
-
-    public void clickRemoveLink(int rowIndex) {
-        getRow(rowIndex).findElement(REMOVE_LINK).click();
+        waitForClickable(PLUS_BUTTON);
     }
 
     public void waitForCartPageAfterUpdate() {
@@ -81,10 +72,5 @@ public class CartPage extends BasePage {
 
     public String getPageUrl() {
         return currentUrl();
-    }
-
-    private double parsePrice(String priceText) {
-        String cleaned = priceText.replaceAll("[^0-9.]", "");
-        return Double.parseDouble(cleaned);
     }
 }

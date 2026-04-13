@@ -1,4 +1,4 @@
-package com.automation.base;
+package com.automation.base.us05;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;

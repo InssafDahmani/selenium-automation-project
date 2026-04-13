@@ -1,8 +1,8 @@
-package com.automation.tests;
+package com.automation.tests.us05;
 
-import com.automation.base.DriverFactory;
-import com.automation.pages.CartPage;
-import com.automation.pages.ProductPage;
+import com.automation.base.us05.DriverFactory;
+import com.automation.pages.us05.CartPage;
+import com.automation.pages.us05.ProductPage;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -19,23 +19,23 @@ import java.util.Date;
 
 public class TC0501IncreaseQuantityTest {
 
-    private static final int    PRODUCT_ID     = 20;
+    private static final int PRODUCT_ID = 20;
     private static final String SCREENSHOT_DIR = "target/screenshots/TC0501";
 
-    private WebDriver   driver;
-    private CartPage    cartPage;
+    private WebDriver driver;
+    private CartPage cartPage;
     private ProductPage productPage;
 
     @BeforeMethod
     public void setUpPrecondition() {
-        driver      = DriverFactory.initializeDriver();
-        cartPage    = new CartPage(driver);
+        driver = DriverFactory.initializeDriver();
+        cartPage = new CartPage(driver);
         productPage = new ProductPage(driver);
 
         new File(SCREENSHOT_DIR).mkdirs();
         productPage.navigateToProduct(PRODUCT_ID);
         productPage.clickAddToCart();
-        waitBriefly(1_500);
+        cartPage.navigateToCart();
     }
 
     @AfterMethod
@@ -55,7 +55,9 @@ public class TC0501IncreaseQuantityTest {
         Assert.assertEquals(qtyBeforeEdit, 1,
             "Precondition: product must have quantity = 1 in cart before edit. Found: " + qtyBeforeEdit);
         double unitPrice = cartPage.getProductPrice(0);
+
         System.out.println("[TC0501] Unit price from cart: $" + unitPrice);
+
         cartPage.clickEditLink(0);
         String editPageUrl = productPage.getPageUrl();
         Assert.assertTrue(editPageUrl.contains("pageState=edit"),
@@ -82,20 +84,21 @@ public class TC0501IncreaseQuantityTest {
         Assert.assertEquals(qtyInCartAfterUpdate, 2,
             "Cart must show quantity = 2 after update. Found: " + qtyInCartAfterUpdate);
         double updatedCartPrice = cartPage.getProductPrice(0);
-        double expectedPrice    = unitPrice * 2;
+        double expectedPrice = unitPrice * 2;
         Assert.assertEquals(updatedCartPrice, expectedPrice, 0.01,
             "Cart price must equal unit price × 2 = $" + expectedPrice
-            + ". Found: $" + updatedCartPrice);
+                + ". Found: $" + updatedCartPrice);
 
         System.out.println("[TC0501] Cart qty=" + qtyInCartAfterUpdate
             + " | Price=$" + updatedCartPrice + " | Expected=$" + expectedPrice);
 
         captureScreenshot("TC0501_PASS");
     }
+
     private void captureScreenshot(String label) {
         try {
-            TakesScreenshot ts  = (TakesScreenshot) driver;
-            File            src = ts.getScreenshotAs(OutputType.FILE);
+            TakesScreenshot ts = (TakesScreenshot) driver;
+            File src = ts.getScreenshotAs(OutputType.FILE);
             String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
             String path = SCREENSHOT_DIR + File.separator + label + "_" + timestamp + ".png";
             Files.createDirectories(Paths.get(SCREENSHOT_DIR));
@@ -104,9 +107,5 @@ public class TC0501IncreaseQuantityTest {
         } catch (Exception e) {
             System.err.println("[TC0501] Screenshot capture failed: " + e.getMessage());
         }
-    }
-
-    private void waitBriefly(long millis) {
-        try { Thread.sleep(millis); } catch (InterruptedException ignored) {}
     }
 }

@@ -1,4 +1,4 @@
-package com.automation.base;
+package com.automation.base.us05;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;

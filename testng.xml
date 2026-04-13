@@ -5,7 +5,7 @@
     
     <test name="US5 Quantity Tests">
         <classes>
-            <class name="com.automation.tests.US5QuantityTests"/>
+            <class name="com.automation.tests.us05.TC0501IncreaseQuantityTest"/>
         </classes>
     </test>
 
