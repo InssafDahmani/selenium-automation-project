@@ -1,0 +1,60 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# Test Output (auto-generated when running tests)
+test-output/
+screenshots/
+allure-results/
+*.log
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+*.code-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Compiled
+*.class
+*.jar
+*.war
+*.ear
+
+# Logs
+logs/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# Node modules (if any)
+node_modules/
+
+# WebDriver binaries (auto-downloaded by WebDriverManager)
+.wdm/
+drivers/
+
+# Internal documentation (don't push)
+GIT_PUSH_INSTRUCTIONS.md
+
+# Keep these files
+!.gitignore
+!README.md
+!pom.xml

@@ -1,0 +1,52 @@
+US04;;;;;#;Test Data;
+"As a customer,
+I want to delete a product from my cart
+So that I cancel buying this product";;;;;;;
+;;;;;;;
+;;;;;;;
+;;;;;;;
+;;;;;;;
+Test Case ID;Title;Precondition;Step;Description;Expected Result;Status;Actual Results (Fail)
+TC0401;Delete a single product from cart;Cart contains one single product;1;"Navigate to cart
+https://advantageonlineshopping.com/#/shoppingCart";"The Shopping cart is displayed and 
+contains one product";PASSED;
+;;;2;"Click on ""REMOVE""";"Cart displays ""Your shopping cart is empty""";;
+TC0402;"Delete one product from multiple 
+products from cart";Cart contains at least 2 different products;1;"Navigate to cart
+https://advantageonlineshopping.com/#/shoppingCart";"The cart is displayed and 
+contains more than one product";PASSED;
+;;;2;"Click on ""REMOVE"" on one product";"The product is deleted, other products remains,
+total recalculated correctly, item count decremented";;
+TC0403;Delete a product with quantity > 1;Cart contains one product with quantity 2 or more;1;"Navigate to cart
+https://advantageonlineshopping.com/#/shoppingCart";"The cart is displayed and 
+contains one product";PASSED;
+;;;2;"Click on ""REMOVE"" on the product with quantity > 1";"Cart displays ""Your shopping cart is empty""";;
+TC0404;Cart icon and header item count update;Cart contains at least 2 different products;1;"Navigate to cart
+https://advantageonlineshopping.com/#/shoppingCart";"The cart is displayed and 
+contains more than one product";PASSED;
+;;;2;"Click on ""REMOVE"" on one  product";"The product is deleted and the item count decrements on the cart icon
+and header";;
+TC0405;"Cart deletion consistency across cart page
+and mini-cart dropdown";Cart contains 2 different products;1;"Navigate to cart
+https://advantageonlineshopping.com/#/shoppingCart";"The cart is displayed and 
+contains two products";PASSED;
+;;;2;Hover on mini-cart dropdown;"The dropdown displays the same products of
+the cart";;
+;;;3;"Click on the X icon next to the  first product from
+the mini-cart dropdown";"Product removed, item count and total correct in both the dropdown
+and the cart";;
+;;;4;"Click on ""REMOVE"" on second product from
+the main cart";Both the dropdown and the cart are empty;;
+TC0406;Deletion with two tabs open;Same user logged in on two browser tabs;1;"On first browser tab : Navigate to cart
+https://advantageonlineshopping.com/#/shoppingCart";"The Shopping cart is displayed and 
+contains 2 products";FAILED;"The Shopping cart is displayed and 
+contains 2 products"
+;;;2;"Click on ""REMOVE"" on one  product";"The product is deleted, 1 product remains,
+total recalculated correctly, item count decremented";;"The product is deleted, other product remains,
+total recalculated correctly, item count decremented"
+;;Cart contains 2  different products;3;"On second browser tab : Navigate to cart
+https://advantageonlineshopping.com/#/shoppingCart";"The Shopping cart is displayed and 
+contains 2 products";;"The Shopping cart is displayed and 
+contains 2 products"
+;;;4;Refresh the shopping cart page on second browser tab;"The product is deleted, 1 product remains,
+total recalculated correctly, item count decremented";;The user is logged out and shopping cart displays empty
