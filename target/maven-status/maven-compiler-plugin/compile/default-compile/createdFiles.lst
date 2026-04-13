@@ -1,0 +1,4 @@
+com\automation\pages\us05\CartPage.class
+com\automation\pages\us05\ProductPage.class
+com\automation\base\us05\DriverFactory.class
+com\automation\base\us05\BasePage.class
