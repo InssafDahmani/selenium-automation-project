@@ -2,10 +2,16 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="US5 - Quantity Management Test Suite">
-    
+
+    <test name="US3 Add Product Without Login">
+        <classes>
+            <class name="com.automation.tests.AddProductToCartWithoutLoginTest"/>
+        </classes>
+    </test>
+
     <test name="US5 Quantity Tests">
         <classes>
-            <class name="com.automation.tests.us05.TC0501IncreaseQuantityTest"/>
+            <class name="com.automation.tests.TC0501IncreaseQuantityTest"/>
         </classes>
     </test>
 
