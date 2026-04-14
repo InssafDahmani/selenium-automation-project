@@ -3,6 +3,11 @@
 
 <suite name="US5 - Quantity Management Test Suite">
 
+    <test name="US1  Signup with a username that already exists">
+        <classes>
+            <class name="com.automation.tests.TC013_UsernameExistsTest"/>
+        </classes>
+    </test>
     <test name="US3 Add Product Without Login">
         <classes>
             <class name="com.automation.tests.AddProductToCartWithoutLoginTest"/>
